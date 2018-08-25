@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ferin blog</title>
-    <link>https://ferin-15.github.io/</link>
-    <description>Recent content on ferin blog</description>
+    <title>Joi on ferin blog</title>
+    <link>https://ferin-15.github.io/tags/joi/</link>
+    <description>Recent content in Joi on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Sun, 26 Aug 2018 08:22:05 +0900</lastBuildDate>
     
-	<atom:link href="https://ferin-15.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ferin-15.github.io/tags/joi/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://ferin-15.github.io/2018/08/26/joi2017yoe/</guid>
       <description>問題ページ 解法 2次元グリッドをグラフに直して考えてみる。問題の条件的にこのグラフに閉路が存在することはなくDAGになっている。したがって閉路</description>
-    </item>
-    
-    <item>
-      <title>ARC101 D - Median of Medians</title>
-      <link>https://ferin-15.github.io/2018/08/26/arc101d/</link>
-      <pubDate>Sun, 26 Aug 2018 02:13:22 +0900</pubDate>
-      
-      <guid>https://ferin-15.github.io/2018/08/26/arc101d/</guid>
-      <description>問題ページ 解法 $a[i]$が中央値となる区間の数を求めて$m=\text{floor}(n*(n+1)/4)+1$番目の数を求める方針で考え</description>
     </item>
     
   </channel>

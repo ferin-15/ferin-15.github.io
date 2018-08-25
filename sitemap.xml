@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://ferin-15.github.io/2018/08/26/joi2017yoe/</loc>
+    <lastmod>2018-08-26T08:22:05+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://ferin-15.github.io/2018/08/26/arc101d/</loc>
     <lastmod>2018-08-26T02:13:22+09:00</lastmod>
   </url>
@@ -19,8 +24,14 @@
   </url>
   
   <url>
+    <loc>https://ferin-15.github.io/tags/joi/</loc>
+    <lastmod>2018-08-26T08:22:05+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://ferin-15.github.io/post/</loc>
-    <lastmod>2018-08-26T02:13:22+09:00</lastmod>
+    <lastmod>2018-08-26T08:22:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -32,19 +43,19 @@
   
   <url>
     <loc>https://ferin-15.github.io/</loc>
-    <lastmod>2018-08-26T02:13:22+09:00</lastmod>
+    <lastmod>2018-08-26T08:22:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://ferin-15.github.io/tags/%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/</loc>
-    <lastmod>2018-08-26T02:13:22+09:00</lastmod>
+    <lastmod>2018-08-26T08:22:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://ferin-15.github.io/categories/%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/</loc>
-    <lastmod>2018-08-26T02:13:22+09:00</lastmod>
+    <lastmod>2018-08-26T08:22:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   

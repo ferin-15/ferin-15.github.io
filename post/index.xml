@@ -6,10 +6,19 @@
     <description>Recent content in Posts on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 26 Aug 2018 02:13:22 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 26 Aug 2018 08:22:05 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>第１６回日本情報オリンピック 予選 E - 尾根 (Ridge)</title>
+      <link>https://ferin-15.github.io/2018/08/26/joi2017yoe/</link>
+      <pubDate>Sun, 26 Aug 2018 08:22:05 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/08/26/joi2017yoe/</guid>
+      <description>問題ページ 解法 2次元グリッドをグラフに直して考えてみる。問題の条件的にこのグラフに閉路が存在することはなくDAGになっている。したがって閉路</description>
+    </item>
     
     <item>
       <title>ARC101 D - Median of Medians</title>
