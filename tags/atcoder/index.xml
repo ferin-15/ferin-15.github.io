@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ferin blog</title>
-    <link>https://ferin-15.github.io/</link>
-    <description>Recent content on ferin blog</description>
+    <title>Atcoder on ferin blog</title>
+    <link>https://ferin-15.github.io/tags/atcoder/</link>
+    <description>Recent content in Atcoder on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
     <lastBuildDate>Sun, 26 Aug 2018 02:13:22 +0900</lastBuildDate>
     
-	<atom:link href="https://ferin-15.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://ferin-15.github.io/tags/atcoder/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
