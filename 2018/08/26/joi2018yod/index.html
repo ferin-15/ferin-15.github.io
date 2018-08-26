@@ -17,7 +17,7 @@
   
 
   
-  <title>AOJ0635 ヘビの JOI 君 (Snake JOI)</title>
+  <title>JOI2017/2018 予選 D - 水ようかん (Mizuyokan)</title>
 
   
   
@@ -145,7 +145,7 @@ if (!doNotTrack) {
         
     </p>
     <h1 class="entry-title">
-         AOJ0635 ヘビの JOI 君 (Snake JOI) 
+         JOI2017/2018 予選 D - 水ようかん (Mizuyokan) 
     </h1>
 </header>
 
@@ -155,11 +155,20 @@ if (!doNotTrack) {
           
           
           
-          <p></p>
+          <p>
+<a href="https://joi2018yo.contest.atcoder.jp/tasks/joi2018_yo_d">問題ページ</a></p>
 
 <h2 id="解法">解法</h2>
 
-<p>拡張dijkstraをする。d[i][j][k]=(i番目の頂点を最後に通って種類がkの部屋を通ってからj分経った) とする。暑い部屋→寒い部屋、寒い部屋→暑い部屋でx分経つ前に部屋に入ってしまうときはその辺を使えないとして遷移を書くと通る。</p>
+<p>DPをしろという制約と雰囲気があるのでDPをする。dp[i][j]=(i番目を最後に切って最短がjのとき、最小の最大ピースの長さ)としてDPをする。dp[i][j]からdp[k][l]に遷移するときは区間[i+1,k]の新たなピースができると考える。区間[i+1,k]の長さ(=len)は累積和を持っておけばO(1)で求められる。</p>
+
+<ul>
+<li>dp[k][len]=min(dp[k][len],dp[i][j])　(区間[i+1,k]のピースが最小のピース)</li>
+<li>dp[k][j]=min(dp[k][j],len)　(区間[i+1,k]のピースが最大のピース)</li>
+<li>dp[k][j]=min(dp[k][j],dp[i][j])　(otherwise)<br /></li>
+</ul>
+
+<p>遷移がO(n)で状態数がO(nmax(l))なので計算量は間に合う。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
@@ -233,26 +242,6 @@ if (!doNotTrack) {
 </span><span class="lnt">69
 </span><span class="lnt">70
 </span><span class="lnt">71
-</span><span class="lnt">72
-</span><span class="lnt">73
-</span><span class="lnt">74
-</span><span class="lnt">75
-</span><span class="lnt">76
-</span><span class="lnt">77
-</span><span class="lnt">78
-</span><span class="lnt">79
-</span><span class="lnt">80
-</span><span class="lnt">81
-</span><span class="lnt">82
-</span><span class="lnt">83
-</span><span class="lnt">84
-</span><span class="lnt">85
-</span><span class="lnt">86
-</span><span class="lnt">87
-</span><span class="lnt">88
-</span><span class="lnt">89
-</span><span class="lnt">90
-</span><span class="lnt">91
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp">
@@ -292,56 +281,36 @@ if (!doNotTrack) {
 
 <span class="kt">int</span> <span class="n">dx</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="n">dy</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
 
+<span class="kt">int</span> <span class="n">dp</span><span class="p">[</span><span class="mi">55</span><span class="p">][</span><span class="mi">50010</span><span class="p">];</span>
 <span class="kt">signed</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
   <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 
-  <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">x</span><span class="p">;</span>
-  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">&gt;&gt;</span> <span class="n">x</span><span class="p">;</span>
-  <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">t</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-  <span class="n">VV</span><span class="o">&lt;</span><span class="n">PII</span><span class="o">&gt;</span> <span class="n">g</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">d</span><span class="p">;</span>
-    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="o">--</span><span class="p">,</span> <span class="n">b</span><span class="o">--</span><span class="p">;</span>
-    <span class="n">g</span><span class="p">[</span><span class="n">a</span><span class="p">].</span><span class="n">PB</span><span class="p">({</span><span class="n">b</span><span class="p">,</span> <span class="n">d</span><span class="p">});</span>
-    <span class="n">g</span><span class="p">[</span><span class="n">b</span><span class="p">].</span><span class="n">PB</span><span class="p">({</span><span class="n">a</span><span class="p">,</span> <span class="n">d</span><span class="p">});</span>
-  <span class="p">}</span>
+  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
+  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
+  <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">l</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+  <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">sum</span> <span class="o">+=</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 
-  <span class="c1">// d[i][j][k] = (頂点iを最後に通ってtypeKを通ってからj分経った)
-</span><span class="c1"></span>  <span class="n">VVV</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">d</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">VV</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">INF</span><span class="p">)));</span>
-  <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">VV</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&gt;</span> <span class="n">que</span><span class="p">;</span>
-  <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">});</span>
+  <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+  <span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
 
-  <span class="k">while</span><span class="p">(</span><span class="n">que</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
-    <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
-    <span class="kt">int</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ver</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">time</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">type</span> <span class="o">=</span> <span class="n">v</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">ver</span><span class="p">][</span><span class="n">time</span><span class="p">][</span><span class="n">type</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">cost</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
-    <span class="c1">// cout &lt;&lt; v &lt;&lt; endl;
-</span><span class="c1"></span>    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">i</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="n">ver</span><span class="p">])</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">((</span><span class="n">type</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="n">time</span><span class="o">+</span><span class="n">i</span><span class="p">.</span><span class="n">second</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">)</span>
-        <span class="o">||</span> <span class="p">(</span><span class="n">type</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">time</span><span class="o">+</span><span class="n">i</span><span class="p">.</span><span class="n">second</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">))</span> <span class="k">continue</span><span class="p">;</span>
-
-      <span class="kt">int</span> <span class="n">ntype</span><span class="p">;</span>
-      <span class="kt">int</span> <span class="n">ntime</span><span class="p">;</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span> <span class="o">||</span> <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="n">ntime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-      <span class="k">else</span> <span class="n">ntime</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">time</span><span class="o">+</span><span class="n">i</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="n">ntype</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
-      <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="n">ntype</span><span class="o">=</span><span class="n">type</span><span class="p">;</span>
-      <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="n">ntype</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
-
-      <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ntime</span><span class="p">][</span><span class="n">ntype</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">d</span><span class="p">[</span><span class="n">ver</span><span class="p">][</span><span class="n">time</span><span class="p">][</span><span class="n">type</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">.</span><span class="n">second</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ntime</span><span class="p">][</span><span class="n">ntype</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">ver</span><span class="p">][</span><span class="n">time</span><span class="p">][</span><span class="n">type</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="p">.</span><span class="n">second</span><span class="p">;</span>
-        <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">][</span><span class="n">ntime</span><span class="p">][</span><span class="n">ntype</span><span class="p">],</span> <span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="p">,</span> <span class="n">ntime</span><span class="p">,</span> <span class="n">ntype</span><span class="p">});</span>
-      <span class="p">}</span>
+  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="n">REP</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">sum</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+  
+  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="n">REP</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">sum</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">FOR</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// [i+1,k]が新たなピースになる 
+</span><span class="c1"></span>      <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">j</span><span class="p">)</span> <span class="n">chmin</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
+      <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span> <span class="n">chmin</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+      <span class="k">else</span> <span class="n">chmin</span><span class="p">(</span><span class="n">dp</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">],</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
     <span class="p">}</span>
   <span class="p">}</span>
 
-  <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
-  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">REP</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="n">chmin</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]);</span>
-  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sum</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="n">chmin</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="n">dp</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">-</span><span class="n">i</span><span class="p">);</span>
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ret</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -372,11 +341,9 @@ if (!doNotTrack) {
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://ferin-15.github.io/2018/08/26/joi2017yoe/" title="第１６回日本情報オリンピック 予選 E - 尾根 (Ridge)">第１６回日本情報オリンピック 予選 E - 尾根 (Ridge)</a>
+        <a class="basic-alignment left" href="https://ferin-15.github.io/2018/08/26/aoj0635/" title="AOJ0635 ヘビの JOI 君 (Snake JOI)">AOJ0635 ヘビの JOI 君 (Snake JOI)</a>
     
 
-    
-      <a class="basic-alignment right" href="https://ferin-15.github.io/2018/08/26/joi2018yod/" title="JOI2017/2018 予選 D - 水ようかん (Mizuyokan)">JOI2017/2018 予選 D - 水ようかん (Mizuyokan)</a>
     
   </p>
   

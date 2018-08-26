@@ -6,10 +6,19 @@
     <description>Recent content in Joi on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 26 Aug 2018 18:41:18 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 26 Aug 2018 19:39:53 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/joi/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JOI2017/2018 予選 D - 水ようかん (Mizuyokan)</title>
+      <link>https://ferin-15.github.io/2018/08/26/joi2018yod/</link>
+      <pubDate>Sun, 26 Aug 2018 19:39:53 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/08/26/joi2018yod/</guid>
+      <description>問題ページ 解法 DPをしろという制約と雰囲気があるのでDPをする。dp[i][j]=(i番目を最後に切って最短がjのとき、最小の最大ピースの長</description>
+    </item>
     
     <item>
       <title>AOJ0635 ヘビの JOI 君 (Snake JOI)</title>
