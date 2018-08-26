@@ -6,10 +6,19 @@
     <description>Recent content in Posts on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 26 Aug 2018 22:11:19 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 27 Aug 2018 03:42:43 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AOJ0542 認証レベル</title>
+      <link>https://ferin-15.github.io/2018/08/27/aoj0542/</link>
+      <pubDate>Mon, 27 Aug 2018 03:42:43 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/08/27/aoj0542/</guid>
+      <description>問題ページ 第一感二分探索で「承認レベルがxのときにy個以上の部屋を訪れられるか？」に答える方法だった。判定にO(HW)かけると1つの事務所に</description>
+    </item>
     
     <item>
       <title>第８回日本情報オリンピック 本選 C - あみだくじ</title>
