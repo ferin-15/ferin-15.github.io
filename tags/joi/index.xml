@@ -6,10 +6,19 @@
     <description>Recent content in Joi on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 26 Aug 2018 08:22:05 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 26 Aug 2018 18:41:18 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/joi/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AOJ0635 ヘビの JOI 君 (Snake JOI)</title>
+      <link>https://ferin-15.github.io/2018/08/26/aoj0635/</link>
+      <pubDate>Sun, 26 Aug 2018 18:41:18 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/08/26/aoj0635/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>第１６回日本情報オリンピック 予選 E - 尾根 (Ridge)</title>
