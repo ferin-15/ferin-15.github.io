@@ -6,10 +6,19 @@
     <description>Recent content in Joi on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sun, 26 Aug 2018 19:39:53 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 26 Aug 2018 22:11:19 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/joi/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>第８回日本情報オリンピック 本選 C - あみだくじ</title>
+      <link>https://ferin-15.github.io/2018/08/26/joi2009hoc/</link>
+      <pubDate>Sun, 26 Aug 2018 22:11:19 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/08/26/joi2009hoc/</guid>
+      <description>問題ページ 解法 あみだくじでi番目の縦棒がどこにたどりつくのかはO(m)で求められる。v[i]=iで初期化し縦棒a[i]とa[i]+1をつなぐ</description>
+    </item>
     
     <item>
       <title>JOI2017/2018 予選 D - 水ようかん (Mizuyokan)</title>
