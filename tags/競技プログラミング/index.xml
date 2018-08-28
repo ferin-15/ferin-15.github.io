@@ -6,10 +6,19 @@
     <description>Recent content in 競技プログラミング on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 28 Aug 2018 22:00:24 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 28 Aug 2018 23:07:18 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JOI春合宿2008 flu - インフルエンザ (Flu)</title>
+      <link>https://ferin-15.github.io/2018/08/28/joisc2008_flu/</link>
+      <pubDate>Tue, 28 Aug 2018 23:07:18 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/08/28/joisc2008_flu/</guid>
+      <description>問題ページ 解法 a[i]=(都市iで流行が始まる日付) としてBFSをします。状態数は都市数なのでO(N)、ある都市から感染する都市を求めるのに</description>
+    </item>
     
     <item>
       <title>JOI第10回本線 D - 歩くサンタクロース (Walking Santa)</title>
