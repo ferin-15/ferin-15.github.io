@@ -6,10 +6,19 @@
     <description>Recent content on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 28 Aug 2018 06:52:30 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 28 Aug 2018 22:00:24 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JOI第10回本線 D - 歩くサンタクロース (Walking Santa)</title>
+      <link>https://ferin-15.github.io/2018/08/28/joi2011hod/</link>
+      <pubDate>Tue, 28 Aug 2018 22:00:24 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/08/28/joi2011hod/</guid>
+      <description>問題ページ 座標(mx,my)とi番目の家の距離をdist(i)とすると、$2*\sum_{i=0}^n \text{dist}(i) - \text{max}(\text{</description>
+    </item>
     
     <item>
       <title>JOI2010予選 F - 方向音痴のトナカイ</title>
