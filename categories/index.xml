@@ -11,6 +11,24 @@
     
     
     <item>
+      <title>Category1</title>
+      <link>https://ferin-15.github.io/categories/category1/</link>
+      <pubDate>Tue, 28 Aug 2018 23:07:18 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/categories/category1/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Category2</title>
+      <link>https://ferin-15.github.io/categories/category2/</link>
+      <pubDate>Tue, 28 Aug 2018 23:07:18 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/categories/category2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>競技プログラミング</title>
       <link>https://ferin-15.github.io/categories/%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/</link>
       <pubDate>Tue, 28 Aug 2018 22:00:24 +0900</pubDate>
