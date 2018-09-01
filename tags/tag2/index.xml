@@ -6,18 +6,18 @@
     <description>Recent content in Tag2 on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 28 Aug 2018 23:07:18 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 01 Sep 2018 05:45:54 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>JOI春合宿2008 flu - インフルエンザ (Flu)</title>
-      <link>https://ferin-15.github.io/2018/08/28/joisc2008_flu/</link>
-      <pubDate>Tue, 28 Aug 2018 23:07:18 +0900</pubDate>
+      <title>ARC093 E - Bichrome Spanning Tree</title>
+      <link>https://ferin-15.github.io/2018/09/01/0997/</link>
+      <pubDate>Sat, 01 Sep 2018 05:45:54 +0900</pubDate>
       
-      <guid>https://ferin-15.github.io/2018/08/28/joisc2008_flu/</guid>
-      <description>問題ページ 解法 a[i]=(都市iで流行が始まる日付) としてBFSをします。状態数は都市数なのでO(N)、ある都市から感染する都市を求めるのに</description>
+      <guid>https://ferin-15.github.io/2018/09/01/0997/</guid>
+      <description>問題ページ 橋は全域木をつくるのに確実に使うので二重編連結成分分解して連結成分ごとにDPとか考えたけどX&amp;lt;=10^12でDPの条件を持て</description>
     </item>
     
   </channel>

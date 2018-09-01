@@ -6,10 +6,28 @@
     <description>Recent content in 競技プログラミング on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Fri, 31 Aug 2018 03:40:54 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 01 Sep 2018 09:01:08 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ARC066 E - Addition and Subtraction Hard</title>
+      <link>https://ferin-15.github.io/2018/09/01/0995/</link>
+      <pubDate>Sat, 01 Sep 2018 09:01:08 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/01/0995/</guid>
+      <description>問題ページ 括弧を挿入することで値が変化するのはマイナスの後に括弧を挿入した場合のみである。したがって+のあとに括弧を挿入することは考えないと</description>
+    </item>
+    
+    <item>
+      <title>ARC059 E - キャンディーとN人の子供 / Children and Candies</title>
+      <link>https://ferin-15.github.io/2018/09/01/0996/</link>
+      <pubDate>Sat, 01 Sep 2018 08:33:47 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/01/0996/</guid>
+      <description>問題ページ まず部分点の解法について考える。n=3のときに求めるべき値$f(x_1,x_2,x_3)$を式の形で書いてみる。 $$ x_1^0 \times x_2^0 \times x_3^c + x_1^0 \times</description>
+    </item>
     
     <item>
       <title>Codeforces Round #467 (Div. 2) D. Sleepy Game</title>
