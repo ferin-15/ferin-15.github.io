@@ -6,10 +6,19 @@
     <description>Recent content in 競技プログラミング on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 11 Sep 2018 11:28:33 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 11 Sep 2018 14:58:49 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/categories/%E7%AB%B6%E6%8A%80%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AOJ0613 財宝</title>
+      <link>https://ferin-15.github.io/2018/09/11/0993/</link>
+      <pubDate>Tue, 11 Sep 2018 14:58:49 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/11/0993/</guid>
+      <description>問題ページ $N \geq 30$という不思議な制約をしているので半分全列挙っぽい。$O(N3^(N/2))$で半分ずつ探索してマージを高速にできればよさ</description>
+    </item>
     
     <item>
       <title>JOI第15回本選 C - 鉄道運賃 (Train Fare)</title>
