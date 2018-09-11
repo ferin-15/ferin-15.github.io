@@ -6,10 +6,19 @@
     <description>Recent content on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sat, 01 Sep 2018 09:01:08 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 11 Sep 2018 11:28:33 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JOI第15回本選 C - 鉄道運賃 (Train Fare)</title>
+      <link>https://ferin-15.github.io/2018/09/11/0994/</link>
+      <pubDate>Tue, 11 Sep 2018 11:28:33 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/11/0994/</guid>
+      <description>問題ページ 頂点1から頂点xまでの最短経路について考えたいのでグラフから最短路DAGを作成しておく。頂点1から頂点xの最短経路が最初のままであ</description>
+    </item>
     
     <item>
       <title>ARC066 E - Addition and Subtraction Hard</title>
