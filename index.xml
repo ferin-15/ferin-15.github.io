@@ -6,10 +6,28 @@
     <description>Recent content on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Tue, 11 Sep 2018 14:58:49 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 12 Sep 2018 18:05:25 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSA #86 Water Tower</title>
+      <link>https://ferin-15.github.io/2018/09/12/0990/</link>
+      <pubDate>Wed, 12 Sep 2018 18:05:25 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/12/0990/</guid>
+      <description>問題ページ サンプルの説明のようにシミュレーションを行っていく。時刻tを小刻みに動かしていくようなシミュレーション方法では計算量的にまず間に合</description>
+    </item>
+    
+    <item>
+      <title>CSA #86 Palindrome Free Strings</title>
+      <link>https://ferin-15.github.io/2018/09/12/0991/</link>
+      <pubDate>Wed, 12 Sep 2018 17:52:33 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/12/0991/</guid>
+      <description>問題ページ 長さ2Nの回文が存在するのであれば両端を一組ずつ削っていくことで長さ2の回文になる。この長さ2の回文を変更し回文でなくすることで長</description>
+    </item>
     
     <item>
       <title>AOJ0613 財宝</title>
