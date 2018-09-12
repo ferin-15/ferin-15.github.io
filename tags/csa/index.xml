@@ -6,10 +6,28 @@
     <description>Recent content in Csa on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 12 Sep 2018 21:41:40 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 13 Sep 2018 00:19:37 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/csa/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSA #66 D - Flipping Matrix</title>
+      <link>https://ferin-15.github.io/2018/09/13/0986/</link>
+      <pubDate>Thu, 13 Sep 2018 00:19:37 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/13/0986/</guid>
+      <description>問題ページ ある場所の1をswap操作を用いて対角線上にもっていったとする。するとこの1と同じ行,列に存在する1を対角線上にswapで持ってい</description>
+    </item>
+    
+    <item>
+      <title>CSA #66 C - Counting Quacks</title>
+      <link>https://ferin-15.github.io/2018/09/13/0987/</link>
+      <pubDate>Thu, 13 Sep 2018 00:19:35 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/13/0987/</guid>
+      <description>問題ページ v[i]=(時刻iに鳴く鳥の数) を求めることを考える。周期がx[i]で鳴く鳥がcnt[i]匹いた場合、x[j]+=cnti とする。</description>
+    </item>
     
     <item>
       <title>CSA #67 E - Hamming Distances</title>
