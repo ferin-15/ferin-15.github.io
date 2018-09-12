@@ -6,10 +6,28 @@
     <description>Recent content in Csa on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 12 Sep 2018 18:05:25 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 12 Sep 2018 21:41:40 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/csa/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSA #67 E - Hamming Distances</title>
+      <link>https://ferin-15.github.io/2018/09/12/0988/</link>
+      <pubDate>Wed, 12 Sep 2018 21:41:40 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/12/0988/</guid>
+      <description>問題ページ 考えたこと A[i]より前の要素A[j]について探索するO(N^2)の高速化を考える cnt[i][j]=(A[i]とのハミング距離が</description>
+    </item>
+    
+    <item>
+      <title>CSA #67 D - Falling Balls</title>
+      <link>https://ferin-15.github.io/2018/09/12/0989/</link>
+      <pubDate>Wed, 12 Sep 2018 21:27:24 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/12/0989/</guid>
+      <description>問題ページ a[i]=(位置iに落としたときにボールが落ちる位置)とする。最初a[i]=iとなっている。高さが低い水平台から順に更新していく。</description>
+    </item>
     
     <item>
       <title>CSA #86 Water Tower</title>
