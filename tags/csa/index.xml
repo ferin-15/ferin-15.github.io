@@ -6,10 +6,19 @@
     <description>Recent content in Csa on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Thu, 13 Sep 2018 00:19:37 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 13 Sep 2018 19:43:13 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/csa/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CSA #69 D - Cover the Tree</title>
+      <link>https://ferin-15.github.io/2018/09/13/0985/</link>
+      <pubDate>Thu, 13 Sep 2018 19:43:13 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/13/0985/</guid>
+      <description>問題ページ 適当な頂点をrootとした根付き木で考える パスとして選ぶ頂点は木の葉を選ぶべきなのが明らか パスの数としてceil(葉の数/2)は少</description>
+    </item>
     
     <item>
       <title>CSA #66 D - Flipping Matrix</title>

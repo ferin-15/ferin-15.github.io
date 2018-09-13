@@ -17,7 +17,7 @@
   
 
   
-  <title>CSA #66 D - Flipping Matrix</title>
+  <title>CSA #69 D - Cover the Tree</title>
 
   
   
@@ -145,7 +145,7 @@ if (!doNotTrack) {
         
     </p>
     <h1 class="entry-title">
-         CSA #66 D - Flipping Matrix 
+         CSA #69 D - Cover the Tree 
     </h1>
 </header>
 
@@ -156,11 +156,31 @@ if (!doNotTrack) {
           
           
           <p>
-<a href="https://csacademy.com/contest/archive/task/flipping-matrix">問題ページ</a></p>
+<a href="https://csacademy.com/contest/archive/task/cover-the-tree">問題ページ</a></p>
 
-<p>ある場所の1をswap操作を用いて対角線上にもっていったとする。するとこの1と同じ行,列に存在する1を対角線上にswapで持っていくことは不可能である。したがって対角線上に1を並べるには同じ行、列に存在しないという条件下でN個の1を選ぶ必要がある。<br />
-2N個の頂点を使ってN個を行、もうN個は列としたグラフを考える。1が(y,x)に存在するのであれば行yを表す頂点と列xを表す頂点をつなぐ辺を張る。そしてこのグラフ上で最大マッチングを求める。このグラフは二部マッチングなので最大フローを用いて最大マッチングを求めることができる。<br />
-流量が1の辺を見ることで(最大マッチングに使用されている辺)=(対角線上に置かれる1)を求めることができる。使用する1の位置を求めればあとは対角線上に置かれるように1をswapしていけばよい。v[i]=(i行目で使用する1が何列目にあるか) と記録しておくとi列目とv[i]列目をswapする操作を出力するをN回繰り返すことで答えの操作列を求めることができる。</p>
+<ul>
+<li>適当な頂点をrootとした根付き木で考える</li>
+<li>パスとして選ぶ頂点は木の葉を選ぶべきなのが明らか</li>
+<li>パスの数としてceil(葉の数/2)は少なくとも必要</li>
+<li>葉の頂点の集合から2つ組をつくることを繰り返して全ての辺を覆いたい</li>
+<li>leaf[i] = {rootのi番目の子の部分木に含まれる葉の集合} とする</li>
+<li>leaf[i],leaf<a href="i!=j">j</a> から1つずつ葉を選べばLCAがrootとなってうまくカバーできるpathになる</li>
+<li>全ての経路でLCAがrootとなっていれば全ての辺をカバーできている</li>
+<li>適当に異なる集合から1つずつ要素を取るを繰り返してみる</li>
+<li>これを出すと落ちる<br />
+&mdash;&ndash;解説を見る&mdash;&ndash;<br /></li>
+<li>上で書いたような方法ではleaf[i].size()が偏っている場合がまずい</li>
+<li>最終的にleaf[i]にのみ要素が残っていて同じ集合から2つ取るような状況になるとrootがLCAとなるようなパスにならない</li>
+<li>rootとして適当な頂点を選んでいたところを葉についての重心に変更する</li>
+<li>こうするとleaf[i].size() &lt; (葉の数/2) となる</li>
+<li>leaf[i].size() が大きい2つを取って1つずつ葉を取ってくるという操作を繰り返すことで偏ることはない</li>
+</ul>
+
+<p>偏ってるとまずいみたいなケースで重心を選ぶとちょうどいいみたいなことがありそう。</p>
+
+<p>最後のパートの部分問題も割と見ることがありそう。<br />
+Q: 数列A (ただしA[i] &lt; sum(A)/2) の状況で2要素を選んでそれぞれ-1する操作を繰り返す。全ての要素を0にするにはどのように操作すればよいか。<br />
+A: 数列Aのうち大きい要素を2つ取ってきてそれぞれ-1を繰り返す。pri_queを使えばできる。証明ができない…</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">  1
@@ -292,8 +312,6 @@ if (!doNotTrack) {
 </span><span class="lnt">127
 </span><span class="lnt">128
 </span><span class="lnt">129
-</span><span class="lnt">130
-</span><span class="lnt">131
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp">
@@ -333,49 +351,6 @@ if (!doNotTrack) {
 
 <span class="kt">int</span> <span class="n">dx</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="n">dy</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
 
-<span class="k">struct</span> <span class="n">foldFulkerson</span> <span class="p">{</span>
-  <span class="k">struct</span> <span class="n">edge</span> <span class="p">{</span><span class="kt">int</span> <span class="n">to</span><span class="p">,</span> <span class="n">cap</span><span class="p">,</span> <span class="n">rev</span><span class="p">;};</span>
-  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-  <span class="n">VV</span><span class="o">&lt;</span><span class="n">edge</span><span class="o">&gt;</span> <span class="n">g</span><span class="p">;</span>
-  <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">used</span><span class="p">;</span>
-
-  <span class="n">foldFulkerson</span><span class="p">(){}</span>
-  <span class="n">foldFulkerson</span><span class="p">(</span><span class="kt">int</span> <span class="n">n_</span><span class="p">)</span> <span class="o">:</span> <span class="n">n</span><span class="p">(</span><span class="n">n_</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">g</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="o">&lt;</span><span class="n">edge</span><span class="o">&gt;</span><span class="p">());</span>
-  <span class="p">}</span>
-
-  <span class="kt">void</span> <span class="n">add_edge</span><span class="p">(</span><span class="kt">int</span> <span class="n">from</span><span class="p">,</span> <span class="kt">int</span> <span class="n">to</span><span class="p">,</span> <span class="kt">int</span> <span class="n">cap</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">g</span><span class="p">[</span><span class="n">from</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">to</span><span class="p">,</span> <span class="n">cap</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">g</span><span class="p">[</span><span class="n">to</span><span class="p">].</span><span class="n">size</span><span class="p">()});</span>
-    <span class="n">g</span><span class="p">[</span><span class="n">to</span><span class="p">].</span><span class="n">push_back</span><span class="p">({</span><span class="n">from</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">g</span><span class="p">[</span><span class="n">from</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">});</span>
-  <span class="p">}</span>
-
-  <span class="kt">int</span> <span class="n">dfs</span><span class="p">(</span><span class="kt">int</span> <span class="n">v</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">t</span><span class="p">)</span> <span class="k">return</span> <span class="n">f</span><span class="p">;</span>
-    <span class="n">used</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="o">&amp;</span><span class="nl">e</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="n">v</span><span class="p">])</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">used</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">to</span><span class="p">]</span> <span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">.</span><span class="n">cap</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">to</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">min</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">e</span><span class="p">.</span><span class="n">cap</span><span class="p">));</span>
-        <span class="k">if</span><span class="p">(</span><span class="n">d</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-          <span class="n">e</span><span class="p">.</span><span class="n">cap</span> <span class="o">-=</span> <span class="n">d</span><span class="p">;</span>
-          <span class="n">g</span><span class="p">[</span><span class="n">e</span><span class="p">.</span><span class="n">to</span><span class="p">][</span><span class="n">e</span><span class="p">.</span><span class="n">rev</span><span class="p">].</span><span class="n">cap</span> <span class="o">+=</span> <span class="n">d</span><span class="p">;</span>
-          <span class="k">return</span> <span class="n">d</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="kt">int</span> <span class="n">max_flow</span><span class="p">(</span><span class="kt">int</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">flow</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-      <span class="n">used</span><span class="p">.</span><span class="n">assign</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-      <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="n">dfs</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">INF</span><span class="p">);</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">f</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">flow</span><span class="p">;</span>
-      <span class="n">flow</span> <span class="o">+=</span> <span class="n">f</span><span class="p">;</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-
 <span class="kt">signed</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
@@ -383,46 +358,87 @@ if (!doNotTrack) {
 
   <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
   <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
-  <span class="n">VV</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
-  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="n">REP</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
-
-  <span class="n">foldFulkerson</span> <span class="n">flow</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">2</span><span class="p">);</span>
-  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="n">REP</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="n">flow</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="n">j</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">flow</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="n">flow</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="n">VV</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">g</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">;</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">u</span> <span class="o">&gt;&gt;</span> <span class="n">v</span><span class="p">;</span> <span class="n">u</span><span class="o">--</span><span class="p">,</span> <span class="n">v</span><span class="o">--</span><span class="p">;</span>
+    <span class="n">g</span><span class="p">[</span><span class="n">u</span><span class="p">].</span><span class="n">PB</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+    <span class="n">g</span><span class="p">[</span><span class="n">v</span><span class="p">].</span><span class="n">PB</span><span class="p">(</span><span class="n">u</span><span class="p">);</span>
   <span class="p">}</span>
 
-  <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="n">flow</span><span class="p">.</span><span class="n">max_flow</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
-  <span class="k">if</span><span class="p">(</span><span class="n">ret</span> <span class="o">!=</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;1&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;1 2&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
   <span class="p">}</span>
 
-  <span class="c1">// v[i] = (i行目で使う1が何列目にあるか)
-</span><span class="c1"></span>  <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+  <span class="c1">// 葉の数と根を決める
+</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">root</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
   <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">j</span><span class="p">:</span> <span class="n">flow</span><span class="p">.</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">j</span><span class="p">.</span><span class="n">cap</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">.</span><span class="n">to</span> <span class="o">-</span> <span class="n">n</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="n">m</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">else</span> <span class="n">root</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="c1">// 重心を求める
+</span><span class="c1"></span>  <span class="k">auto</span> <span class="n">findCentroid</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]()</span> <span class="p">{</span>
+    <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">size</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">centroid</span><span class="p">;</span>
+    <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">dfs</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span> <span class="n">ver</span><span class="p">,</span> <span class="kt">int</span> <span class="n">par</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kt">bool</span> <span class="n">is_centroid</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+      <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">to</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="n">ver</span><span class="p">])</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">to</span> <span class="o">==</span> <span class="n">par</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+        <span class="n">dfs</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">ver</span><span class="p">);</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="n">to</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">m</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="n">is_centroid</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+        <span class="n">size</span><span class="p">[</span><span class="n">ver</span><span class="p">]</span> <span class="o">+=</span> <span class="n">size</span><span class="p">[</span><span class="n">to</span><span class="p">];</span>
       <span class="p">}</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">ver</span><span class="p">].</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="n">size</span><span class="p">[</span><span class="n">ver</span><span class="p">]</span><span class="o">++</span><span class="p">;</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">m</span> <span class="o">-</span> <span class="n">size</span><span class="p">[</span><span class="n">ver</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">m</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="n">is_centroid</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">is_centroid</span><span class="p">)</span> <span class="n">centroid</span><span class="p">.</span><span class="n">PB</span><span class="p">(</span><span class="n">ver</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="n">dfs</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">centroid</span><span class="p">;</span>
+  <span class="p">};</span>
+  <span class="k">auto</span> <span class="n">centoroid</span> <span class="o">=</span> <span class="n">findCentroid</span><span class="p">();</span>
+
+  <span class="c1">// 重心からdfsして葉の集合を求める
+</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">VV</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">leaf</span><span class="p">;</span>
+  <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">dfs</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span> <span class="n">ver</span><span class="p">,</span> <span class="kt">int</span> <span class="n">par</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">ver</span><span class="p">].</span><span class="n">size</span><span class="p">()</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="n">leaf</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">PB</span><span class="p">(</span><span class="n">ver</span><span class="p">);</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">to</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="n">ver</span><span class="p">])</span> <span class="p">{</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">to</span> <span class="o">==</span> <span class="n">par</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+      <span class="n">dfs</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">ver</span><span class="p">);</span>
     <span class="p">}</span>
+  <span class="p">};</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">i</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="n">centoroid</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span> <span class="p">{</span>
+    <span class="n">leaf</span><span class="p">.</span><span class="n">PB</span><span class="p">(</span><span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">());</span>
+    <span class="n">dfs</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">centoroid</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="n">idx</span><span class="o">++</span><span class="p">;</span>
   <span class="p">}</span>
 
-
-  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// v[i] を i に移す
-</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">continue</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;C &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">idx1</span><span class="p">,</span> <span class="n">idx2</span><span class="p">;</span>
-    <span class="n">REP</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="n">idx1</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">idx2</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+  <span class="c1">// leaf[i].size() の上位2つを取って経路を一つつくるを繰り返す
+</span><span class="c1"></span>  <span class="n">V</span><span class="o">&lt;</span><span class="n">PII</span><span class="o">&gt;</span> <span class="n">ans</span><span class="p">;</span>
+  <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">PII</span><span class="o">&gt;</span> <span class="n">que</span><span class="p">;</span>
+  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">leaf</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">leaf</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+      <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">leaf</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">size</span><span class="p">(),</span> <span class="n">i</span><span class="p">});</span>
     <span class="p">}</span>
-    <span class="n">swap</span><span class="p">(</span><span class="n">v</span><span class="p">[</span><span class="n">idx1</span><span class="p">],</span> <span class="n">v</span><span class="p">[</span><span class="n">idx2</span><span class="p">]);</span>
   <span class="p">}</span>
+  <span class="k">while</span><span class="p">(</span><span class="n">que</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">que</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">PII</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+      <span class="n">ans</span><span class="p">.</span><span class="n">PB</span><span class="p">({</span><span class="n">leaf</span><span class="p">[</span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">back</span><span class="p">(),</span> <span class="n">centoroid</span><span class="p">[</span><span class="mi">0</span><span class="p">]});</span>
+      <span class="k">continue</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">PII</span> <span class="n">p1</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+    <span class="n">PII</span> <span class="n">p2</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+    <span class="n">ans</span><span class="p">.</span><span class="n">PB</span><span class="p">({</span><span class="n">leaf</span><span class="p">[</span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">back</span><span class="p">(),</span> <span class="n">leaf</span><span class="p">[</span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">back</span><span class="p">()});</span>
+    <span class="n">leaf</span><span class="p">[</span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="n">leaf</span><span class="p">[</span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">pop_back</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">leaf</span><span class="p">[</span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">size</span><span class="p">())</span> <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">leaf</span><span class="p">[</span><span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">size</span><span class="p">(),</span> <span class="n">p1</span><span class="p">.</span><span class="n">second</span><span class="p">});</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">leaf</span><span class="p">[</span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">size</span><span class="p">())</span> <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">leaf</span><span class="p">[</span><span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="p">].</span><span class="n">size</span><span class="p">(),</span> <span class="n">p2</span><span class="p">.</span><span class="n">second</span><span class="p">});</span>
+  <span class="p">}</span>
+
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">i</span><span class="p">:</span> <span class="n">ans</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">.</span><span class="n">first</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">.</span><span class="n">second</span><span class="o">+</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
@@ -453,11 +469,9 @@ if (!doNotTrack) {
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://ferin-15.github.io/2018/09/13/0987/" title="CSA #66 C - Counting Quacks">CSA #66 C - Counting Quacks</a>
+        <a class="basic-alignment left" href="https://ferin-15.github.io/2018/09/13/0986/" title="CSA #66 D - Flipping Matrix">CSA #66 D - Flipping Matrix</a>
     
 
-    
-      <a class="basic-alignment right" href="https://ferin-15.github.io/2018/09/13/0985/" title="CSA #69 D - Cover the Tree">CSA #69 D - Cover the Tree</a>
     
   </p>
   
