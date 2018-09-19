@@ -158,14 +158,24 @@ if (!doNotTrack) {
           <p>
 <a href="https://onlinejudge.u-aizu.ac.jp/beta/room.html#ACPC2018Day1/problems/E">問題ページ</a></p>
 
-<p>両隣swapで条件を満たすような数列を作る系の問題だと同じものを交差させる意味はないので条件を満たすもっとも近いものを持ってくるみたいな貪欲がよくある気がしたので貪欲をしたくなる。増加,減少,増加,減少,…と減少,増加,減少,増加,…の2パターンを試して操作回数が少ない方を出力みたいなのを書こうとする。条件を満たさないときの直すパターンを4通りに分けて考える。<br />
-* A[i-1] &gt; A[i] でなければならないが A[i-1] &lt; A[i]
-  * A[i] &lt; A[i+1] であればswap(A[i-1],A[i]) A[i-1] &gt; A[i] &lt; A[i+1] になる
-  * A[i] &gt; A[i+1] であればswap(A[i],A[i+1])
-* A[i-1] &lt; A[i] でなければならないが A[i-1] &gt; A[i]
-  * A[i] &gt; A[i+1] であればswap(A[i-1],A[i])
-  * A[i] &lt;&gt; A[i+1] であればswap(A[i],A[i+1])<br />
-前から見ていって条件を満たさなければこのようにswapして訂正する操作を貪欲に繰り返すことで解ける。</p>
+<p>両隣swapで条件を満たすような数列を作る系の問題だと同じものを交差させる意味はないので条件を満たすもっとも近いものを持ってくるみたいな貪欲がよくある気がしたので貪欲をしたくなる。増加,減少,増加,減少,…と減少,増加,減少,増加,…の2パターンを試して操作回数が少ない方を出力みたいなのを書こうとする。条件を満たさないときの直すパターンを4通りに分けて考える。</p>
+
+<ul>
+<li>A[i-1] &gt; A[i] でなければならないが A[i-1] &lt; A[i]
+
+<ul>
+<li>A[i] &lt; A[i+1] であればswap(A[i-1],A[i]) A[i-1] &gt; A[i] &lt; A[i+1] になる</li>
+<li>A[i] &gt; A[i+1] であればswap(A[i],A[i+1])</li>
+</ul></li>
+<li>A[i-1] &lt; A[i] でなければならないが A[i-1] &gt; A[i]
+
+<ul>
+<li>A[i] &gt; A[i+1] であればswap(A[i-1],A[i])</li>
+<li>A[i] &lt;&gt; A[i+1] であればswap(A[i],A[i+1])<br /></li>
+</ul></li>
+</ul>
+
+<p>前から見ていって条件を満たさなければこのようにswapして訂正する操作を貪欲に繰り返すことで解ける。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">  1
