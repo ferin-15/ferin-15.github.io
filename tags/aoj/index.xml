@@ -6,10 +6,64 @@
     <description>Recent content in Aoj on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Wed, 19 Sep 2018 17:59:18 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 20 Sep 2018 19:10:32 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/aoj/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ACPCday2 G: Painting</title>
+      <link>https://ferin-15.github.io/2018/09/20/0976/</link>
+      <pubDate>Thu, 20 Sep 2018 19:10:32 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/20/0976/</guid>
+      <description>問題ページ あるペアが与えられると以下のように数列に数が足されていく。 (1,4) 2 3 0 1 2 3 0 1 2 3 … (3,7) 4 5 6 0 1 2 3 4 5 6 … 差分を見ると周期Bで-B</description>
+    </item>
+    
+    <item>
+      <title>ACPCday2 F: Timing</title>
+      <link>https://ferin-15.github.io/2018/09/20/0977/</link>
+      <pubDate>Thu, 20 Sep 2018 19:02:29 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/20/0977/</guid>
+      <description>&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ACPCday2 E: Donut Hole</title>
+      <link>https://ferin-15.github.io/2018/09/20/0978/</link>
+      <pubDate>Thu, 20 Sep 2018 18:57:42 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/20/0978/</guid>
+      <description>問題ページ もし穴がなければ原点さえ通ればドーナツは二等分することができるので傾きはどうでもいい。つまり穴を二等分することさえできれば面積は等</description>
+    </item>
+    
+    <item>
+      <title>ACPCday2 D: Gridgedge</title>
+      <link>https://ferin-15.github.io/2018/09/20/0979/</link>
+      <pubDate>Thu, 20 Sep 2018 18:53:21 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/20/0979/</guid>
+      <description>問題ページ 最短経路のコストを求めるにはdijkstra法を使えばよい。dijkstra法を行うときに最短経路の組み合わせ数を持てば組み合わせ</description>
+    </item>
+    
+    <item>
+      <title>ACPCday2 C: Round And Round</title>
+      <link>https://ferin-15.github.io/2018/09/20/0980/</link>
+      <pubDate>Thu, 20 Sep 2018 18:49:36 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/20/0980/</guid>
+      <description>問題ページ スワップ操作ではk+1番目が先頭になりk番目が末尾になる。これは巡回シフトをしているに等しい。数列は1~Nが順番に並んでいるのだか</description>
+    </item>
+    
+    <item>
+      <title>ACPCday2 B: U&amp;U</title>
+      <link>https://ferin-15.github.io/2018/09/20/0981/</link>
+      <pubDate>Thu, 20 Sep 2018 18:42:55 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/20/0981/</guid>
+      <description>問題ページ 問題文に書かれている通りシミュレーションを行う。まずチームUKUが生き残るように行動を行うときのことを考える。あるチームが生き残る</description>
+    </item>
     
     <item>
       <title>ACPC2018 day1 E: 凸凹数列</title>

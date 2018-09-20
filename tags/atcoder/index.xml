@@ -6,10 +6,19 @@
     <description>Recent content in Atcoder on ferin blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja-jp</language>
-    <lastBuildDate>Sat, 01 Sep 2018 09:01:08 +0900</lastBuildDate>
+    <lastBuildDate>Thu, 20 Sep 2018 17:59:42 +0900</lastBuildDate>
     
 	<atom:link href="https://ferin-15.github.io/tags/atcoder/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>JAG夏合宿day1 E - Fences</title>
+      <link>https://ferin-15.github.io/2018/09/20/0982/</link>
+      <pubDate>Thu, 20 Sep 2018 17:59:42 +0900</pubDate>
+      
+      <guid>https://ferin-15.github.io/2018/09/20/0982/</guid>
+      <description>まず円の面積を求めるのは簡単で多角形の面積を求められればよい。多角形の頂点と円までの距離が等しいという制約は多角形の頂点がある半径の円上に乗</description>
+    </item>
     
     <item>
       <title>ARC066 E - Addition and Subtraction Hard</title>

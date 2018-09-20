@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+    
+    
+      <link href="/css/fonts.css" rel="stylesheet" type="text/css">
+    
+  
+
+  
+  <title>ACPCday2 F: Timing</title>
+
+  
+  
+  <link rel="stylesheet" href="/css/hugo-octopress.css">
+
+  
+  
+
+  
+    <link rel="stylesheet" href="/css/fork-awesome.min.css">
+  
+
+  
+  <link href="https://ferin-15.github.io/favicon.png" rel="icon">
+
+  
+  
+  
+
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <meta name="author" content="">
+
+  
+  <meta name="generator" content="Hugo 0.47.1" />
+
+  
+  
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-124589157-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+  
+  
+
+</head>
+<body>
+
+
+<header role="banner"><hgroup>
+  
+  <h1><a href="https://ferin-15.github.io/">ferin blog</a></h1>
+    <h2></h2>
+</hgroup></header>
+
+
+<nav role="navigation">
+<fieldset class="mobile-nav">
+  
+  <select onchange="location = this.value;">
+    <option value="">Navigate…</option>
+      
+        <option value="https://ferin-15.github.io/">» Home</option>
+      
+        <option value="https://ferin-15.github.io/post/">» Archives</option>
+      
+        <option value="https://ferin-15.github.io/about/">» About</option>
+      
+
+  </select>
+</fieldset>
+
+
+<ul class="main-navigation">
+  
+  
+    
+      <li><a href="https://ferin-15.github.io/" title="Home">Home</a></li>
+    
+  
+    
+      <li><a href="https://ferin-15.github.io/post/" title="Archives" >Archives</a></li>
+    
+  
+    
+      <li><a href="https://ferin-15.github.io/about/" title="About" >About</a></li>
+    
+  
+</ul>
+
+
+<ul class="subscription">
+  
+
+</ul>
+
+
+</nav>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+  });
+</script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<div id="main">
+  <div id="content">
+    <div>
+      <article class="hentry" role="article">
+
+        
+        
+
+<header>
+    <p class="meta">Sep 20, 2018
+         - 2 minute read 
+        
+
+        
+        
+        
+            - <a class="label" href="https://ferin-15.github.io/categories/%e7%ab%b6%e6%8a%80%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0/">競技プログラミング </a>
+        
+    </p>
+    <h1 class="entry-title">
+         ACPCday2 F: Timing 
+    </h1>
+</header>
+
+
+        <div class="entry-content">
+          
+          
+          
+          
+          <p></p>
+
+<p><a href="https://onlinejudge.u-aizu.ac.jp/beta/room.html#ACPC2018Day2/problems/F">問題ページ</a></p>
+
+<p>グラフの辺の重みの設定が特殊になっている状況で最短経路を求めればよい。ある頂点に時刻tにたどり着いたときに辺iを使って次の頂点に行くのにかかるコストは $min_k(ceil(b/(t+a+k)) + k)$ となる。制約的に二分探索か三分探索ができそうだなあと思いどんな感じのグラフになっているかを確認してみる。するとt+a+k=sqrt(a)となっているあたりで最小な下に凸になっているようなグラフになっている。したがって各辺を通るのにかかるコストはk=sqrt(a)-a-t or k=0となっているあたりを試せば高速に求められる。辺のコストが求められるのであとはdijkstra法をして最短経路を求めればよい。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp">
+</span><span class="cp"></span>
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">ll</span> <span class="o">=</span> <span class="kt">long</span> <span class="kt">long</span><span class="p">;</span>
+<span class="cp">#define int ll
+</span><span class="cp"></span><span class="k">using</span> <span class="n">PII</span> <span class="o">=</span> <span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="k">using</span> <span class="n">V</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="k">using</span> <span class="n">VV</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">V</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="k">using</span> <span class="n">VVV</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">VV</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+<span class="cp">#define FOR(i, a, n) for (ll i = (ll)a; i &lt; (ll)n; ++i)
+</span><span class="cp">#define REP(i, n) FOR(i, 0, n)
+</span><span class="cp">#define ALL(x) x.begin(), x.end()
+</span><span class="cp">#define PB push_back
+</span><span class="cp"></span>
+<span class="k">const</span> <span class="n">ll</span> <span class="n">INF</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1LL</span><span class="o">&lt;&lt;</span><span class="mi">60</span><span class="p">);</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">MOD</span> <span class="o">=</span> <span class="mi">1000000007</span><span class="p">;</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">chmin</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">=</span> <span class="n">min</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span> <span class="p">}</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">chmax</span><span class="p">(</span><span class="n">T</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span> <span class="o">=</span> <span class="n">max</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span> <span class="p">}</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="kt">bool</span> <span class="n">IN</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span> <span class="n">b</span><span class="p">,</span> <span class="n">T</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="o">&lt;=</span><span class="n">x</span><span class="o">&amp;&amp;</span><span class="n">x</span><span class="o">&lt;</span><span class="n">b</span><span class="p">;</span> <span class="p">}</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">T</span> <span class="n">ceil</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="o">/</span><span class="n">b</span> <span class="o">+</span> <span class="o">!!</span><span class="p">(</span><span class="n">a</span><span class="o">%</span><span class="n">b</span><span class="p">);</span> <span class="p">}</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="err"> </span><span class="nc">S</span><span class="p">,</span><span class="k">class</span><span class="err"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">ostream</span> <span class="o">&amp;</span><span class="k">operator</span> <span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span><span class="k">const</span> <span class="n">pair</span><span class="o">&lt;</span><span class="n">S</span><span class="p">,</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">){</span>
+  <span class="n">out</span><span class="o">&lt;&lt;</span><span class="sc">&#39;(&#39;</span><span class="o">&lt;&lt;</span><span class="n">a</span><span class="p">.</span><span class="n">first</span><span class="o">&lt;&lt;</span><span class="sc">&#39;,&#39;</span><span class="o">&lt;&lt;</span><span class="n">a</span><span class="p">.</span><span class="n">second</span><span class="o">&lt;&lt;</span><span class="sc">&#39;)&#39;</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="err"> </span><span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">ostream</span> <span class="o">&amp;</span><span class="k">operator</span> <span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span><span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">){</span>
+  <span class="n">out</span><span class="o">&lt;&lt;</span><span class="sc">&#39;[&#39;</span><span class="p">;</span>
+  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span><span class="n">out</span><span class="o">&lt;&lt;</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span><span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">!=</span><span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="n">out</span><span class="o">&lt;&lt;</span><span class="sc">&#39;,&#39;</span><span class="p">;}</span>
+  <span class="n">out</span><span class="o">&lt;&lt;</span><span class="sc">&#39;]&#39;</span><span class="p">;</span>
+  <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">dx</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="n">dy</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+
+<span class="kt">signed</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
+
+  <span class="k">struct</span> <span class="n">edge</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">to</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="p">};</span>
+
+  <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">;</span>
+  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span> <span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">&gt;&gt;</span> <span class="n">t</span><span class="p">;</span> <span class="n">s</span><span class="o">--</span><span class="p">,</span> <span class="n">t</span><span class="o">--</span><span class="p">;</span>
+  <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">a</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="n">m</span><span class="p">);</span>
+  <span class="n">VV</span><span class="o">&lt;</span><span class="n">edge</span><span class="o">&gt;</span> <span class="n">g</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">--</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">--</span><span class="p">;</span>
+    <span class="n">g</span><span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">push_back</span><span class="p">({</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>
+    <span class="n">g</span><span class="p">[</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">]].</span><span class="n">push_back</span><span class="p">({</span><span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]});</span>
+  <span class="p">}</span>
+
+  <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">d</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+  <span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">PII</span><span class="p">,</span> <span class="n">V</span><span class="o">&lt;</span><span class="n">PII</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;</span><span class="n">PII</span><span class="o">&gt;&gt;</span> <span class="n">que</span><span class="p">;</span>
+  <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">d</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="n">s</span><span class="p">});</span>
+
+  <span class="k">while</span><span class="p">(</span><span class="n">que</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="p">{</span>
+    <span class="n">PII</span> <span class="n">p</span> <span class="o">=</span> <span class="n">que</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="n">que</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">p</span><span class="p">.</span><span class="n">first</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+    <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="nl">i</span><span class="p">:</span> <span class="n">g</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="p">])</span> <span class="p">{</span>
+      <span class="c1">// p.second -&gt; i.to の適切なkを見つける
+</span><span class="c1"></span>      <span class="c1">// ceil(i.b/(d[p.second]+i.a+k)) + k を最小化するkを求める
+</span><span class="c1"></span>      <span class="kt">int</span> <span class="n">sq</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">i</span><span class="p">.</span><span class="n">b</span><span class="p">),</span> <span class="n">cost</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">i</span><span class="p">.</span><span class="n">b</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="p">]</span><span class="o">+</span><span class="n">i</span><span class="p">.</span><span class="n">a</span><span class="p">));</span>
+      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">max</span><span class="p">(</span><span class="mi">0LL</span><span class="p">,</span> <span class="n">sq</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="p">]</span><span class="o">-</span><span class="n">i</span><span class="p">.</span><span class="n">a</span><span class="p">);</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">sq</span><span class="o">-</span><span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="p">]</span><span class="o">-</span><span class="n">i</span><span class="p">.</span><span class="n">a</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">ceil</span><span class="p">((</span><span class="kt">double</span><span class="p">)</span><span class="n">i</span><span class="p">.</span><span class="n">b</span><span class="o">/</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="p">]</span><span class="o">+</span><span class="n">i</span><span class="p">.</span><span class="n">a</span><span class="o">+</span><span class="n">j</span><span class="p">))</span> <span class="o">+</span> <span class="n">j</span><span class="p">;</span>
+        <span class="n">chmin</span><span class="p">(</span><span class="n">cost</span><span class="p">,</span> <span class="n">tmp</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">to</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="p">]</span> <span class="o">+</span> <span class="n">cost</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">to</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">p</span><span class="p">.</span><span class="n">second</span><span class="p">]</span> <span class="o">+</span> <span class="n">cost</span><span class="p">;</span>
+        <span class="n">que</span><span class="p">.</span><span class="n">push</span><span class="p">({</span><span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">to</span><span class="p">],</span> <span class="n">i</span><span class="p">.</span><span class="n">to</span><span class="p">});</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="k">if</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">==</span> <span class="n">INF</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+  <span class="k">else</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">d</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+        </div>
+        
+
+<footer>
+  <p class="meta">
+    <span class="byline author vcard">Posted by <span class="fn"></span></span>
+    
+    <time>Sep 20, 2018</time>
+    
+      <span class="categories">
+        Tags:
+        
+          <a class="category" href="https://ferin-15.github.io/tags/%e7%ab%b6%e6%8a%80%e3%83%97%e3%83%ad%e3%82%b0%e3%83%a9%e3%83%9f%e3%83%b3%e3%82%b0">競技プログラミング</a>  <a class="category" href="https://ferin-15.github.io/tags/aoj">AOJ</a>  
+    
+    </span>
+  </p>
+
+  
+  
+
+  
+
+  <p class="meta">
+    
+        <a class="basic-alignment left" href="https://ferin-15.github.io/2018/09/20/0978/" title="ACPCday2 E: Donut Hole">ACPCday2 E: Donut Hole</a>
+    
+
+    
+      <a class="basic-alignment right" href="https://ferin-15.github.io/2018/09/20/0976/" title="ACPCday2 G: Painting">ACPCday2 G: Painting</a>
+    
+  </p>
+  
+</footer>
+
+      </article>
+    </div>
+    
+
+<aside class="sidebar thirds">
+  <section class="first odd">
+
+    
+
+    <p>
+      
+    </p>
+  </section>
+
+
+
+  
+  <ul class="sidebar-nav">
+    <li class="sidebar-nav-item">
+      <a target="_blank" href="https://github.com/ferin-15" title="https://github.com/ferin-15"><i class="fa fa-github fa-3x"></i></a>
+      
+      
+      <a target="_blank" href="https://twitter.com/ferin_tech15" title="https://twitter.com/ferin_tech15"><i class="fa fa-twitter fa-3x"></i></a>
+      
+         
+      
+      
+      
+      
+      
+      
+      
+      
+
+    
+    
+    </li>
+  </ul>
+
+  
+
+  
+
+  
+  
+  
+</aside>
+
+  </div>
+</div>
+
+<footer role="contentinfo">
+  <p>Copyright &copy; 2018  - <a href="https://ferin-15.github.io/license/">License</a> -
+  <span class="credit">Powered by <a target="_blank" href="https://gohugo.io">Hugo</a> and <a target="_blank" href="https://github.com/parsiya/hugo-octopress/">Hugo-Octopress</a> theme.
+</p>
+
+</footer>
+
+
+
+
+
+
+</body>
+</html>
+

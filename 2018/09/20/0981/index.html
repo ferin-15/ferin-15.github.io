@@ -17,7 +17,7 @@
   
 
   
-  <title>ACPC2018 day1 E: 凸凹数列</title>
+  <title>ACPCday2 B: U&amp;U</title>
 
   
   
@@ -134,7 +134,7 @@ if (!doNotTrack) {
         
 
 <header>
-    <p class="meta">Sep 19, 2018
+    <p class="meta">Sep 20, 2018
          - 2 minute read 
         
 
@@ -145,7 +145,7 @@ if (!doNotTrack) {
         
     </p>
     <h1 class="entry-title">
-         ACPC2018 day1 E: 凸凹数列 
+         ACPCday2 B: U&amp;U 
     </h1>
 </header>
 
@@ -156,26 +156,9 @@ if (!doNotTrack) {
           
           
           <p>
-<a href="https://onlinejudge.u-aizu.ac.jp/beta/room.html#ACPC2018Day1/problems/E">問題ページ</a></p>
+<a href="https://onlinejudge.u-aizu.ac.jp/beta/room.html#ACPC2018Day2/problems/B">問題ページ</a></p>
 
-<p>両隣swapで条件を満たすような数列を作る系の問題だと同じものを交差させる意味はないので条件を満たすもっとも近いものを持ってくるみたいな貪欲がよくある気がしたので貪欲をしたくなる。増加,減少,増加,減少,…と減少,増加,減少,増加,…の2パターンを試して操作回数が少ない方を出力みたいなのを書こうとする。条件を満たさないときの直すパターンを4通りに分けて考える。</p>
-
-<ul>
-<li>A[i-1] &gt; A[i] でなければならないが A[i-1] &lt; A[i]
-
-<ul>
-<li>A[i] &lt; A[i+1] であればswap(A[i-1],A[i]) A[i-1] &gt; A[i] &lt; A[i+1] になる</li>
-<li>A[i] &gt; A[i+1] であればswap(A[i],A[i+1])</li>
-</ul></li>
-<li>A[i-1] &lt; A[i] でなければならないが A[i-1] &gt; A[i]
-
-<ul>
-<li>A[i] &gt; A[i+1] であればswap(A[i-1],A[i])</li>
-<li>A[i] &lt;&gt; A[i+1] であればswap(A[i],A[i+1])<br /></li>
-</ul></li>
-</ul>
-
-<p>前から見ていって条件を満たさなければこのようにswapして訂正する操作を貪欲に繰り返すことで解ける。</p>
+<p>問題文に書かれている通りシミュレーションを行う。まずチームUKUが生き残るように行動を行うときのことを考える。あるチームが生き残るためには攻撃をできるだけ受けずに相手をできるだけ倒すように協力して行動すればよい。したがってチームUKUはうしのメンバーをできるだけ倒すように行動し、チームうしはチームUKUのメンバーをできるだけ倒さないように行動すればよい。この行動方針にしたがったシミュレーションを行う。チームうしが生き残る場合にも同様のシミュレーションを行いスコアが少ない方を答えとして出力する。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt">  1
@@ -282,21 +265,6 @@ if (!doNotTrack) {
 </span><span class="lnt">102
 </span><span class="lnt">103
 </span><span class="lnt">104
-</span><span class="lnt">105
-</span><span class="lnt">106
-</span><span class="lnt">107
-</span><span class="lnt">108
-</span><span class="lnt">109
-</span><span class="lnt">110
-</span><span class="lnt">111
-</span><span class="lnt">112
-</span><span class="lnt">113
-</span><span class="lnt">114
-</span><span class="lnt">115
-</span><span class="lnt">116
-</span><span class="lnt">117
-</span><span class="lnt">118
-</span><span class="lnt">119
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp">
@@ -341,80 +309,65 @@ if (!doNotTrack) {
   <span class="n">cin</span><span class="p">.</span><span class="n">tie</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
   <span class="n">ios</span><span class="o">::</span><span class="n">sync_with_stdio</span><span class="p">(</span><span class="nb">false</span><span class="p">);</span>
 
-  <span class="kt">int</span> <span class="n">n</span><span class="p">;</span>
-  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span>
-  <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
-  <span class="n">REP</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-  <span class="n">V</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">b</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-  
+  <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">;</span>
+  <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">;</span>
+
+  <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
+
   <span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">turn</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// i番目の増減が正しくない
-</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">turn</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
-        <span class="c1">// 次が増加ならi-1とi
-</span><span class="c1"></span>        <span class="c1">// 次が減少ならiとi+1
-</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
-          <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-          <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
-          <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
-        <span class="c1">// 次が減少ならi-1とi
-</span><span class="c1"></span>        <span class="c1">// 次が増加ならiとi+1
-</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
-          <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-          <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
-          <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">turn</span> <span class="o">=</span> <span class="o">!</span><span class="n">turn</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">n1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m2</span> <span class="o">=</span> <span class="n">m</span><span class="p">,</span> <span class="n">m1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// uku
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// m1を減らす
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">m1</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">n2</span><span class="o">+</span><span class="n">n1</span><span class="p">))</span> <span class="n">m1</span> <span class="o">-=</span> <span class="n">n2</span><span class="o">+</span><span class="n">n1</span><span class="p">,</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">n1</span><span class="o">+</span><span class="n">n2</span><span class="p">;</span>
+    <span class="k">else</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">m1</span><span class="p">,</span> <span class="n">m1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// m2を減らす (n2+n1) - tmp
+</span><span class="c1"></span>    <span class="n">m2</span> <span class="o">-=</span> <span class="p">(</span><span class="n">n2</span><span class="o">+</span><span class="n">n1</span><span class="o">-</span><span class="n">tmp</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+    <span class="c1">// 余ってたらm1
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">m2</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">m1</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">((</span><span class="n">n2</span><span class="o">+</span><span class="n">n1</span><span class="o">-</span><span class="n">tmp</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="n">m2</span><span class="o">--</span><span class="p">,</span> <span class="n">m1</span><span class="o">++</span><span class="p">;</span> 
+    <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
+    <span class="c1">// usi
+</span><span class="c1"></span>    <span class="c1">// n2-&gt;n1
+</span><span class="c1"></span>    <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n2</span> <span class="o">&lt;</span> <span class="n">m1</span><span class="o">+</span><span class="n">m2</span><span class="p">)</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n1</span> <span class="o">+=</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">else</span> <span class="n">n2</span> <span class="o">-=</span> <span class="n">m1</span><span class="o">+</span><span class="n">m2</span><span class="p">,</span> <span class="n">n1</span> <span class="o">+=</span> <span class="n">m1</span><span class="o">+</span><span class="n">m2</span><span class="p">,</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">m1</span><span class="o">+</span><span class="n">m2</span><span class="p">;</span>
+    <span class="c1">// n1を減らす (m1+m2) - tmp
+</span><span class="c1"></span>    <span class="n">n1</span> <span class="o">-=</span> <span class="n">m1</span><span class="o">+</span><span class="n">m2</span><span class="o">-</span><span class="n">tmp</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n2</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">n1</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+    <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
   <span class="p">}</span>
-
-  <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="n">ret</span><span class="p">;</span>
-  <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">turn</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">FOR</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// i番目の増減が正しくない
-</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">turn</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
-        <span class="c1">// 次が増加ならi-1とi
-</span><span class="c1"></span>        <span class="c1">// 次が減少ならiとi+1
-</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
-          <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-          <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
-          <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="p">{</span>
-        <span class="c1">// 次が減少ならi-1とi
-</span><span class="c1"></span>        <span class="c1">// 次が増加ならiとi+1
-</span><span class="c1"></span>        <span class="k">if</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="o">&gt;=</span> <span class="n">n</span> <span class="o">||</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
-          <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
-          <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="n">swap</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]);</span>
-          <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="n">turn</span> <span class="o">=</span> <span class="o">!</span><span class="n">turn</span><span class="p">;</span>
-  <span class="p">}</span>
-
   <span class="n">chmin</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
-  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 
+  <span class="n">swap</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">);</span>
+  <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">n2</span> <span class="o">=</span> <span class="n">n</span><span class="p">,</span> <span class="n">n1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">m2</span> <span class="o">=</span> <span class="n">m</span><span class="p">,</span> <span class="n">m1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// uku
+</span><span class="c1"></span>    <span class="c1">// n2-&gt;n1
+</span><span class="c1"></span>    <span class="kt">int</span> <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n2</span> <span class="o">&lt;</span> <span class="n">m1</span><span class="o">+</span><span class="n">m2</span><span class="p">)</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n1</span> <span class="o">+=</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">else</span> <span class="n">n2</span> <span class="o">-=</span> <span class="n">m1</span><span class="o">+</span><span class="n">m2</span><span class="p">,</span> <span class="n">n1</span> <span class="o">+=</span> <span class="n">m1</span><span class="o">+</span><span class="n">m2</span><span class="p">,</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">m1</span><span class="o">+</span><span class="n">m2</span><span class="p">;</span>
+    <span class="c1">// n1を減らす (m1+m2) - tmp
+</span><span class="c1"></span>    <span class="n">n1</span> <span class="o">-=</span> <span class="n">m1</span><span class="o">+</span><span class="n">m2</span><span class="o">-</span><span class="n">tmp</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">n2</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">n1</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+    <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
+    <span class="c1">// usi
+</span><span class="c1"></span>    <span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// m1を減らす
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">m1</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">n2</span><span class="o">+</span><span class="n">n1</span><span class="p">))</span> <span class="n">m1</span> <span class="o">-=</span> <span class="n">n2</span><span class="o">+</span><span class="n">n1</span><span class="p">,</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">n1</span><span class="o">+</span><span class="n">n2</span><span class="p">;</span>
+    <span class="k">else</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">m1</span><span class="p">,</span> <span class="n">m1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// m2を減らす (n2+n1) - tmp
+</span><span class="c1"></span>    <span class="n">m2</span> <span class="o">-=</span> <span class="p">(</span><span class="n">n2</span><span class="o">+</span><span class="n">n1</span><span class="o">-</span><span class="n">tmp</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+    <span class="c1">// 余ってたらm1
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="n">m2</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">m1</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">((</span><span class="n">n2</span><span class="o">+</span><span class="n">n1</span><span class="o">-</span><span class="n">tmp</span><span class="p">)</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="n">m2</span><span class="o">--</span><span class="p">,</span> <span class="n">m1</span><span class="o">++</span><span class="p">;</span> 
+    <span class="n">ret</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="n">chmin</span><span class="p">(</span><span class="n">ans</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+
+  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></td></tr></table>
@@ -427,7 +380,7 @@ if (!doNotTrack) {
   <p class="meta">
     <span class="byline author vcard">Posted by <span class="fn"></span></span>
     
-    <time>Sep 19, 2018</time>
+    <time>Sep 20, 2018</time>
     
       <span class="categories">
         Tags:
@@ -444,11 +397,11 @@ if (!doNotTrack) {
 
   <p class="meta">
     
-        <a class="basic-alignment left" href="https://ferin-15.github.io/2018/09/19/0984/" title="ACPC2018 day1 C: 素数">ACPC2018 day1 C: 素数</a>
+        <a class="basic-alignment left" href="https://ferin-15.github.io/2018/09/20/0982/" title="JAG夏合宿day1 E - Fences">JAG夏合宿day1 E - Fences</a>
     
 
     
-      <a class="basic-alignment right" href="https://ferin-15.github.io/2018/09/20/0982/" title="JAG夏合宿day1 E - Fences">JAG夏合宿day1 E - Fences</a>
+      <a class="basic-alignment right" href="https://ferin-15.github.io/2018/09/20/0980/" title="ACPCday2 C: Round And Round">ACPCday2 C: Round And Round</a>
     
   </p>
   
