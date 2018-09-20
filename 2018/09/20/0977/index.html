@@ -159,7 +159,7 @@ if (!doNotTrack) {
 
 <p><a href="https://onlinejudge.u-aizu.ac.jp/beta/room.html#ACPC2018Day2/problems/F">問題ページ</a></p>
 
-<p>グラフの辺の重みの設定が特殊になっている状況で最短経路を求めればよい。ある頂点に時刻tにたどり着いたときに辺iを使って次の頂点に行くのにかかるコストは $min_k(ceil(b/(t+a+k)) + k)$ となる。制約的に二分探索か三分探索ができそうだなあと思いどんな感じのグラフになっているかを確認してみる。するとt+a+k=sqrt(a)となっているあたりで最小な下に凸になっているようなグラフになっている。したがって各辺を通るのにかかるコストはk=sqrt(a)-a-t or k=0となっているあたりを試せば高速に求められる。辺のコストが求められるのであとはdijkstra法をして最短経路を求めればよい。</p>
+<p>グラフの辺の重みの設定が特殊になっている状況で最短経路を求めればよい。ある頂点に時刻tにたどり着いたときに辺iを使って次の頂点に行くのにかかるコストは $min_k(ceil(b/(t+a+k)) + k)$ となる。制約的に二分探索か三分探索ができそうだなあと思いどんな感じのグラフになっているかを確認してみる。するとt+a+k=sqrt(b)となっているあたりで最小な下に凸になっているようなグラフになっている。したがって各辺を通るのにかかるコストはk=sqrt(b)-a-t or k=0となっているあたりを試せば高速に求められる。辺のコストが求められるのであとはdijkstra法をして最短経路を求めればよい。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="lnt"> 1
